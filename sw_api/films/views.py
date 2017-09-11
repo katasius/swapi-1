@@ -17,7 +17,7 @@ def index(request):
 
 
 def detail(request, id):
-    url = 'https://swapi.co/api/films/'+id
+    url = 'https://swapi.co/api/films/'+id+'/'
     req = requests.get(url)
 
     # if json response is coming
@@ -25,6 +25,6 @@ def detail(request, id):
 
     context = {
         'hello': "Hello World!!!",
-        'responses': response['results'],
+        'responses': response,
     }
     return render(request, 'sw_api/films_detail.html', context)

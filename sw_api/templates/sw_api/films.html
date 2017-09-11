@@ -1,5 +1,8 @@
-{{ hello }}
+{{ hello }} films
 
-<a href="{% url 'index' %}">back</a>
+<a href="{% url 'index' %}">back</a><br />
 
-{% for response in responses %} <a href="">{{response}} <br /><br />{% endfor %}
+{% for response in responses %}
+    <a href="{% url 'films:detail' response.url|make_list|slice:'27:'|slice:':-1'|join:'' %}">{{response.title}} detail</a> <br />
+    <br /><br />
+{% endfor %}

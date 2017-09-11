@@ -1,5 +1,8 @@
-{{ hello }} people
+{{ hello }} vehicles
 
-<a href="{% url 'index' %}">back</a>
+<a href="{% url 'index' %}">back</a><br />
 
-{% for response in responses %} <a href="">{{response}} <br /><br />{% endfor %}
+{% for response in responses %}
+    <a href="{% url 'vehicles:detail' response.url|make_list|slice:'30:'|slice:':-1'|join:'' %}">{{response.name}} detail</a> <br />
+    <br /><br />
+{% endfor %}

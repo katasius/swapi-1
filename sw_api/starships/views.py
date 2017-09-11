@@ -3,7 +3,7 @@ import requests
 
 
 def index(request):
-    url = 'https://swapi.co/api/planets/'
+    url = 'https://swapi.co/api/starships/'
     req = requests.get(url)
 
     # if json response is coming
@@ -13,11 +13,11 @@ def index(request):
         'hello': "Hello World!!!",
         'responses': response['results'],
     }
-    return render(request, 'sw_api/planets.html', context)
+    return render(request, 'sw_api/starships.html', context)
 
 
 def detail(request, id):
-    url = 'https://swapi.co/api/planets/'+id
+    url = 'https://swapi.co/api/starships/'+id+'/'
     req = requests.get(url)
 
     # if json response is coming
@@ -25,6 +25,6 @@ def detail(request, id):
 
     context = {
         'hello': "Hello World!!!",
-        'responses': response['results'],
+        'responses': response,
     }
-    return render(request, 'sw_api/planets_detail.html', context)
+    return render(request, 'sw_api/starships_detail.html', context)

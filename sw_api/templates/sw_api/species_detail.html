@@ -1,0 +1,20 @@
+{{ hello }}
+
+<a href="{% url 'index' %}">back</a><br /><br />
+{{ response_people }}<br/><br/>
+
+{% for response,data in responses.items %}
+    {{response}}:
+    {% if response == 'people' %}
+        {% for dat in data %}
+            <a href="{% url 'people:detail' response_people.url|make_list|slice:'28:'|slice:':-1'|join:'' %}">{{response_people.name}}</a>
+        {% endfor %}
+    {% elif response == 'films' %}
+        {% for dat in data %}
+            <a href="{% url 'films:detail' 16 %}">{{response.name}} detail</a>
+        {% endfor %}
+    {% else %}
+        {{ data }}
+    {% endif %}
+    <br />
+{% endfor %}

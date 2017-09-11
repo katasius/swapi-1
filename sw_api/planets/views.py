@@ -17,7 +17,7 @@ def index(request):
 
 
 def detail(request, id):
-    url = 'https://swapi.co/api/planets/'+id
+    url = 'https://swapi.co/api/planets/'+id+'/'
     req = requests.get(url)
 
     # if json response is coming
