@@ -17,6 +17,8 @@ def index(request):
 
 
 def detail(request, id):
+    i = 0
+    response_film = [5, 9]
     url = 'https://swapi.co/api/species/'+id+'/'
     response = requests.get(url).json()
 
@@ -24,11 +26,13 @@ def detail(request, id):
     response_people = requests.get(url_people).json()
 
     for film in response['films']:
-        response_film[0] = requests.get(film).json()
+        response_film[i] = requests.get(film).json()
+        i = i + 1
 
     context = {
         'hello': "Hello World!!!",
         'responses': response,
         'response_people': response_people,
+        'response_films': response_film,
     }
     return render(request, 'sw_api/species_detail.html', context)

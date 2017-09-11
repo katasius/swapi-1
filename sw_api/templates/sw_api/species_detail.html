@@ -1,7 +1,7 @@
 {{ hello }}
 
 <a href="{% url 'index' %}">back</a><br /><br />
-{{ response_people }}<br/><br/>
+{{ responses.films }}<br/><br/>
 
 {% for response,data in responses.items %}
     {{response}}:
@@ -10,8 +10,9 @@
             <a href="{% url 'people:detail' response_people.url|make_list|slice:'28:'|slice:':-1'|join:'' %}">{{response_people.name}}</a>
         {% endfor %}
     {% elif response == 'films' %}
-        {% for dat in data %}
-            <a href="{% url 'films:detail' 16 %}">{{response.name}} detail</a>
+        {% for i in response_films %}
+            <a href="">{{i.title}}</a>
+            {{response_films.url|make_list|slice:'27:'|slice:':-1'|join:'' }}
         {% endfor %}
     {% else %}
         {{ data }}
