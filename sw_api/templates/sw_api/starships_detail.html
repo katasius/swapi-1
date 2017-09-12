@@ -2,4 +2,18 @@
 
 <a href="{% url 'index' %}">back</a><br /><br />
 
-{% for response,data in responses.items %} {{response}}: {{data}} <br />{% endfor %}
+{% for response,data in responses.items %}
+    {{response}}:
+    {% if response == 'films' %}
+        {% for i in response_films %}
+            <a href="/sw-api/films/{{ i.url|make_list|slice:'27:'|slice:':-1'|join:'' }}">{{i.title}}</a>
+        {% endfor %}
+    {% elif response == 'pilots' %}
+        {% for i in response_people %}
+            <a href="/sw-api/people/{{ i.url|make_list|slice:'28:'|slice:':-1'|join:'' }}">{{i.name}}</a>
+        {% endfor %}
+    {% else %}
+        {{ data }}
+    {% endif %}
+    <br />
+{% endfor %}

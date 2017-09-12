@@ -17,14 +17,19 @@ def index(request):
 
 
 def detail(request, id):
-    url = 'https://swapi.co/api/planets/'+id+'/'
-    req = requests.get(url)
+    i = 0
+    response_people = [5, 9]
 
-    # if json response is coming
-    response = req.json()
+    url = 'https://swapi.co/api/planets/'+id+'/'
+    response = requests.get(url).json()
+
+    for people in response['residents']:
+        response_people[i] = requests.get(people).json()
+        i = i + 1
 
     context = {
         'hello': "Hello World!!!",
         'responses': response,
+        'response_people': response_people,
     }
     return render(request, 'sw_api/planets_detail.html', context)

@@ -1,19 +1,19 @@
 {{ hello }}
 
 <a href="{% url 'index' %}">back</a><br /><br />
-{{ responses.films }}<br/><br/>
 
 {% for response,data in responses.items %}
     {{response}}:
     {% if response == 'people' %}
-        {% for dat in data %}
-            <a href="{% url 'people:detail' response_people.url|make_list|slice:'28:'|slice:':-1'|join:'' %}">{{response_people.name}}</a>
+        {% for i in response_people %}
+            <a href="/sw-api/people/{{i.url|make_list|slice:'28:'|slice:':-1'|join:''}}">{{i.name}}</a>
         {% endfor %}
     {% elif response == 'films' %}
         {% for i in response_films %}
-            <a href="">{{i.title}}</a>
-            {{response_films.url|make_list|slice:'27:'|slice:':-1'|join:'' }}
+            <a href="{% url 'films:detail' i.url|make_list|slice:'27:'|slice:':-1'|join:'' %}">{{i.title}}</a>
         {% endfor %}
+    {% elif response == 'homeworld' %}
+        <a href="{% url 'planets:detail' response_planets.url|make_list|slice:'29:'|slice:':-1'|join:'' %}">{{response_planets.name}}</a>
     {% else %}
         {{ data }}
     {% endif %}

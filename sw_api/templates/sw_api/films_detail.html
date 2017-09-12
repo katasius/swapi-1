@@ -2,4 +2,30 @@
 
 <a href="{% url 'index' %}">back</a><br /><br />
 
-{% for response,data in responses.items %} {{response}}: {{data}} <br />{% endfor %}
+{% for response,data in responses.items %}
+    {{response}}:
+    {% if response == 'species' %}
+        {% for i in response_species %}
+            <a href="/sw-api/species/{{i.url|make_list|slice:'29:'|slice:':-1'|join:''}}">{{i.name}}</a>
+        {% endfor %}
+    {% elif response == 'starships' %}
+        {% for i in response_starship %}
+            <a href="/sw-api/starships/{{ i.url|make_list|slice:'31:'|slice:':-1'|join:'' }}">{{i.name}}</a>
+        {% endfor %}
+    {% elif response == 'vehicles' %}
+        {% for i in response_vehicle %}
+            <a href="/sw-api/vehicles/{{ i.url|make_list|slice:'30:'|slice:':-1'|join:'' }}">{{i.name}}</a>
+        {% endfor %}
+    {% elif response == 'planets' %}
+        {% for i in response_planets %}
+            <a href="{% url 'planets:detail' i.url|make_list|slice:'29:'|slice:':-1'|join:'' %}">{{i.name}}</a>
+        {% endfor %}
+    {% elif response == 'characters' %}
+        {% for i in response_people %}
+            <a href="/sw-api/people/{{ i.url|make_list|slice:'28:'|slice:':-1'|join:'' }}">{{i.name}}</a>
+        {% endfor %}
+    {% else %}
+        {{ data }}
+    {% endif %}
+    <br />
+{% endfor %}
