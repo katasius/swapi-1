@@ -8,6 +8,10 @@
         {% for i in response_people %}
             <a href="/sw-api/people/{{i.url|make_list|slice:'28:'|slice:':-1'|join:''}}">{{i.name}}</a>
         {% endfor %}
+    {% elif response == 'films' %}
+        {% for i in response_films %}
+            <a href="/sw-api/films/{{ i.url|make_list|slice:'27:'|slice:':-1'|join:'' }}">{{i.title}}</a>
+        {% endfor %}
     {% else %}
         {{ data }}
     {% endif %}

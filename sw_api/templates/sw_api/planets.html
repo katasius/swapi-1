@@ -1,8 +1,24 @@
-{{ hello }} planets
-
-<a href="{% url 'index' %}">back</a><br />
-
-{% for response in responses %}
+<!-- {% for response in responses %}
     <a href="{% url 'planets:detail' response.url|make_list|slice:'29:'|slice:':-1'|join:'' %}">{{response.name}} detail</a> <br />
     <br /><br />
+{% endfor %} -->
+
+
+<div class="row">
+{% for response in responses %}
+<div class="col-lg-4 col-md-6 mb-4">
+  <div class="card h-100">
+    <a href="#"><img class="card-img-top" src="/static/sw_api/img/{{response.name}}.jpg" alt="" height=400 width=700></a>
+    <div class="card-body">
+      <h4 class="card-title">
+        <a href="{% url 'planets:detail' response.url|make_list|slice:'29:'|slice:':-1'|join:'' %}">{{response.name}}</a>
+      </h4>
+
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+    </div>
+  </div>
+</div>
 {% endfor %}
+</div>

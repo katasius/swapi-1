@@ -1,8 +1,28 @@
-{{ hello }} films
-
-<a href="{% url 'index' %}">back</a><br />
-
+<div class="row">
 {% for response in responses %}
-    <a href="{% url 'films:detail' response.url|make_list|slice:'27:'|slice:':-1'|join:'' %}">{{response.title}} detail</a> <br />
-    <br /><br />
+<div class="col-lg-4 col-md-6 mb-4">
+  <div class="card h-100">
+    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+    <div class="card-body">
+      <h4 class="card-title">
+        <a href="{% url 'films:detail' response.url|make_list|slice:'27:'|slice:':-1'|join:'' %}">{{response.title}} detail</a>
+      </h4>
+      <p class="card-text">{{response.opening_crawl|truncatechars:190}}</p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+    </div>
+  </div>
+</div>
 {% endfor %}
+</div>
+
+{% block javascript_index %}
+<script>
+$(document).ajaxComplete(function() {
+    var $label = $(".my-4");
+    var text = $label.text();
+    $label.text(text.replace("SWAPI", "FILMS"));
+});
+</script>
+{% endblock %}

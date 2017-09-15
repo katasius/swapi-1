@@ -1,6 +1,55 @@
+{% extends "sw_api/base.html" %}
+{% block content %}
+<!-- Page Content -->
+<div class="container">
 
+  <div class="row">
+
+    <div class="col-lg-3">
+
+      <h1 class="my-4" style="text-transform:uppercase;">swapi</h1>
+      <div class="list-group">
+        {% for responses in r %}
+          <a href="#" class="list-group-item {{responses}}">{{responses}}</a>
+        {% endfor %}
+      </div>
+
+    </div>
+    <!-- /.col-lg-3 -->
+
+    <div class="col-lg-9">
+
+      <div class="div1"></div>
+
+    </div>
+    <!-- /.col-lg-9 -->
+
+  </div>
+  <!-- /.row -->
+
+</div>
+<!-- /.container -->
+{% endblock %}
+
+{% block javascript %}
+<script>
 {% for responses in r %}
-    <a href="/sw-api/{{responses}}/">{{responses}}</a><br />
-{% endfor %}
+  $(document).ready(function(){
+      $(".{{responses}}").click(function(){
+          $.ajax({
+            	url: "{{responses}}/",
+            	success: function(result){
+              	$(".div1").html(result);
+          }});
+      });
+});
 
-<!-- <a href="{% url 'planets:index' %}">planets</a><br /> -->
+$(document).ready(function(){
+    $(".{{responses}}").click(function(){
+        $(".my-4").text("{{responses}}");
+    });
+});
+
+{% endfor %}
+</script>
+{% endblock %}
